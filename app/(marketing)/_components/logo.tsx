@@ -12,17 +12,17 @@ export const Logo = () => {
     <div className="hidden md:flex items-center ga-x-2">
       <Image
         src={"/logo.svg"}
-        height={"40"}
-        width={"40"}
+        height={"30"}
+        width={"30"}
         alt="Notion Logo"
-        className="dark:hidden"
+        className="dark:hidden mr-2"
       />
       <Image
         src={"/logo-dark.svg"}
-        height={"40"}
-        width={"40"}
+        height={"30"}
+        width={"30"}
         alt="Notion Logo"
-        className="hidden dark:block"
+        className="hidden dark:block mr-2"
       />
       <p className={cn("font-semibold", font.className)}>Notion</p>
     </div>
