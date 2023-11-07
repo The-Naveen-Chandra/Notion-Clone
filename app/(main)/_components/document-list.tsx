@@ -2,13 +2,14 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { useQuery } from "convex/react";
+import { FileIcon } from "lucide-react";
 
 import { Doc, Id } from "@/convex/_generated/dataModel";
-import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Item } from "./item";
 import { cn } from "@/lib/utils";
-import { FileIcon } from "lucide-react";
+
+import { Item } from "./item";
 
 interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
@@ -39,11 +40,11 @@ export const DocumentList = ({
     router.push(`/documents/${documentId}`);
   };
 
-  if (documents == undefined) {
+  if (documents === undefined) {
     return (
       <>
         <Item.Skeleton level={level} />
-        {level == 0 && (
+        {level === 0 && (
           <>
             <Item.Skeleton level={level} />
             <Item.Skeleton level={level} />
@@ -56,9 +57,11 @@ export const DocumentList = ({
   return (
     <>
       <p
-        style={{ paddingLeft: level ? `${(level + 12) * 25}px` : undefined }}
+        style={{
+          paddingLeft: level ? `${level * 12 + 25}px` : undefined,
+        }}
         className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80 ",
+          "hidden text-sm font-medium text-muted-foreground/80",
           expanded && "last:block",
           level === 0 && "hidden"
         )}
