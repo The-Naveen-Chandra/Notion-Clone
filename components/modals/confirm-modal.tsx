@@ -42,7 +42,7 @@ export const ConfirmModal = ({ children, onConfirm }: ConfirmModalProps) => {
           <AlertDialogCancel onClick={(e) => e.stopPropagation()}>
             Cancel
           </AlertDialogCancel>
-          <AlertDialogAction onClick={handleConfirm} className=" bg-red-600">
+          <AlertDialogAction onClick={handleConfirm} className=" bg-rose-500">
             Confirm
           </AlertDialogAction>
         </AlertDialogFooter>
