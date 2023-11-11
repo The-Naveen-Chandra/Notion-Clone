@@ -3,6 +3,7 @@
 import React, { ElementRef, useRef, useState } from "react";
 import { useMutation } from "convex/react";
 import { ImageIcon, Smile, X, icons } from "lucide-react";
+import TextareaAutoSize from "react-textarea-autosize";
 
 import { Button } from "@/components/ui/button";
 import { Doc } from "@/convex/_generated/dataModel";
@@ -102,6 +103,23 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           </Button>
         )}
       </div>
+      {isEditing && !preview ? (
+        <TextareaAutoSize
+          ref={inputRef}
+          onBlur={disableInput}
+          onKeyDown={onKeyDown}
+          value={value}
+          onChange={(e) => onInput(e.target.value)}
+          className="text-5xl bg-transparent font-bold break-words outline-none text-[#3F3F3F] dark:text-[#CFCFCF] resize-none"
+        />
+      ) : (
+        <div
+          onClick={enableInput}
+          className="pb-[11.5px] text-5xl font-bold break-words outline-none text-[#3F3F3F] dark:text-[#CFCFCF]"
+        >
+          {initialData.title}
+        </div>
+      )}
     </div>
   );
 };
