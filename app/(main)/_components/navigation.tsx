@@ -66,6 +66,22 @@ export const Navigation = () => {
     }
   }, [pathname, isMobile]);
 
+  // keyboard shortcut for creating a new note
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "n" && (event.metaKey || event.altKey)) {
+        // Alt + N pressed, trigger handleCreate
+        handleCreate();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   // function for handling the sidebar size (handleMouseDown)
   const handleMouseDown = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
