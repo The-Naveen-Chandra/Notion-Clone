@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ImageIcon, X } from "lucide-react";
 import { useMutation } from "convex/react";
 import { useParams } from "next/navigation";
+import { useEdgeStore } from "@/lib/edgestore";
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -18,11 +19,18 @@ interface CoverImageProps {
 }
 
 export const CoverImage = ({ url, preview }: CoverImageProps) => {
+  const { edgestore } = useEdgeStore();
   const params = useParams();
   const coverImage = useCoverImage();
   const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
-  const onRemove = () => {
+  const onRemove = async () => {
+    if (url) {
+      await edgestore.publicFiles.delete({
+        url: url,
+      });
+    }
+
     removeCoverImage({
       id: params.documentId as Id<"documents">,
     });
